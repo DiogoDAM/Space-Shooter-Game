@@ -38,7 +38,7 @@ function Player:move(dt)
 	end
 
 	if tools.keyboard:wasPressed("space") then
-		self.scene:add(PlayerBullet:new(tools.newVector2(self.pos.x + self.width/2, self.pos.y)))
+		self.scene:add(PlayerBullet:new(tools.newVector2(self.pos.x + self.width/2, self.pos.y)), "player_bullets")
 	end
 
 	self.pos = self.pos + (dir * self.speed * dt)

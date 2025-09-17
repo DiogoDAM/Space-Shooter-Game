@@ -23,6 +23,14 @@ function tools.newRegion(imagePath, x, y, w, h)
 	return tools.region:new(imagePath, x, y, w, h)
 end
 
+function tools.newEntityList(scene)
+	return require("Tools.Core.Utilities.EntityList"):new(scene)
+end
+
+function tools.newRectCollider(pos, w, h, object)
+	return require("Tools.Collisions.RectCollider"):new(pos, w, h, object)
+end
+
 
 _G.tools = tools
 

@@ -5,3 +5,7 @@ _G.Atlas:addRegion("spr_playerBullet", 0, 48, 8, 8)
 
 _G.BlackColor = { 50 / 255, 47 / 255, 41 / 255, 1 }
 _G.WhiteColor = { 215 / 255, 212 / 255, 204 / 255, 1 }
+
+_G.GameScore = 0
+
+_G.DefaultFont = love.graphics.newFont("Assets/Fonts/windows_command_prompt.ttf", 32)

@@ -6,6 +6,8 @@ local GameScene = require("Game.Scenes.GameScene")
 local gs = GameScene:new()
 
 function love.load()
+	love.graphics.setDefaultFilter("nearest", "nearest")
+
 	gs:initialize()
 	gs:startEntities()
 end

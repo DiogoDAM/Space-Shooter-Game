@@ -5,7 +5,7 @@ function _G.table.removeElement(list, e)
 end
 
 function _G.table.containsKey(list, e)
-	for key, _ in ipairs(list) do
+	for key, _ in pairs(list) do
 		if key == e then return true end
 	end
 end

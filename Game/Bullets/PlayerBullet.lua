@@ -9,13 +9,24 @@ function PlayerBullet:constructor(pos)
 	self.speed = 400
 	self.direction = tools.newVector2(0, -1)
 	self.region = Atlas:getRegion("spr_playerBullet")
+
+	self.collider = tools.newRectCollider(self.pos, self.width, self.height, self)
 end
 
 function PlayerBullet:update(dt)
 	self.pos = self.pos + (self.direction * self.speed * dt)
+	self.collider:setPositin(self.pos)
 
-	if self.pos.y < -32 then self.scene:remove(self) end
+	if self.pos.y < -32 then self.scene:remove(self, "player_bullets") end
 
+	if self.scene then
+		for _, enemy in pairs(self.scene.lists["enemies"]:getEntities()) do
+			if self.collider:collides(enemy.collider) then
+					enemy.health = enemy.health - 1
+					self.scene:remove(self, "player_bullets")
+				end
+		end
+	end
 end
 
 function PlayerBullet:draw()
