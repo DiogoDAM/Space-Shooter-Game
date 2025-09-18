@@ -5,21 +5,26 @@ local Player = tools.entity:extend("Player")
 function Player:constructor()
 	self.__super:constructor()
 
-	self.region = _G.Atlas:getRegion("spr_player")
 	self.speed = 200
 	self.width = 32
 	self.height = 32
 	self.pos = tools.newVector2(love.graphics.getWidth()/2 - self.width/2, love.graphics.getHeight()-self.height-100)
+	self.sprite = nil
 end
 
+function Player:start()
+	self.sprite = tools.newSpriteRender(_G.Atlas:getRegion("spr_player"))
+end
 
 function Player:update(dt)
 	self:move(dt)
+
+	self.sprite.pos = self.pos
+
 end
 
 function Player:draw()
-	love.graphics.setColor(1,1,1)
-	love.graphics.draw(self.region.image, self.region.sourceRect, self.pos.x, self.pos.y)
+	self.sprite:draw()
 end
 
 function Player:move(dt)
@@ -38,7 +43,10 @@ function Player:move(dt)
 	end
 
 	if tools.keyboard:wasPressed("space") then
+		_G.LaserSound:stop()
 		self.scene:add(PlayerBullet:new(tools.newVector2(self.pos.x + self.width/2, self.pos.y)), "player_bullets")
+		_G.LaserSound:setVolume(1)
+		_G.LaserSound:play()
 	end
 
 	self.pos = self.pos + (dir * self.speed * dt)

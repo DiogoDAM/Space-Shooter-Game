@@ -15,23 +15,25 @@ end
 
 function PlayerBullet:update(dt)
 	self.pos = self.pos + (self.direction * self.speed * dt)
-	self.collider:setPositin(self.pos)
+	self.collider:setPosition(self.pos)
 
 	if self.pos.y < -32 then self.scene:remove(self, "player_bullets") end
 
 	if self.scene then
 		for _, enemy in pairs(self.scene.lists["enemies"]:getEntities()) do
 			if self.collider:collides(enemy.collider) then
-					enemy.health = enemy.health - 1
-					self.scene:remove(self, "player_bullets")
+				enemy.health = enemy.health - 1
+				self.scene:remove(self, "player_bullets")
+				_G.LaserExplosionSound:stop()
+				_G.LaserExplosionSound:setVolume(1)
+				_G.LaserExplosionSound:play()
 				end
 		end
 	end
 end
 
 function PlayerBullet:draw()
-	love.graphics.setColor(1,1,1)
-	love.graphics.draw(self.region.image, self.region.sourceRect, self.pos.x, self.pos.y)
+	self.region:draw(self.pos.x, self.pos.y, {1,1,1,1})
 end
 
 return PlayerBullet

@@ -15,21 +15,23 @@ end
 
 function Gordon:update(dt)
 	self.pos = self.pos + (self.direction * self.speed * dt)
-	self.collider:setPositin(self.pos)
+	self.collider:setPosition(self.pos)
 
 	if self.pos.y > love.graphics.getHeight() + 100 then self.scene:remove(self) end
 
 	if self.scene then
 		if self.health <= 0 then
+			_G.EnemyExplosionSound:stop()
 			self.scene:remove(self, "enemies")
+			_G.EnemyExplosionSound:setVolume(1)
+			_G.EnemyExplosionSound:play()
 			_G.GameScore = _G.GameScore + 10
 		end
 	end
 end
 
 function Gordon:draw()
-	love.graphics.setColor(1,1,1)
-	love.graphics.draw(self.region.image, self.region.sourceRect, self.pos.x, self.pos.y)
+	self.region:draw(self.pos.x, self.pos.y, {1, 1, 1, 1})
 end
 
 return Gordon

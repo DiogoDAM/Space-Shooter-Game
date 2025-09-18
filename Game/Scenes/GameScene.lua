@@ -14,7 +14,7 @@ function GameScene:constructor()
 	self.lists.enemies = tools.newEntityList(self)
 	self.lists.player_bullets = tools.newEntityList(self)
 
-	self.spawner = require("Game.Enemies.EnemySpawner"):new(0, 1, self)
+	self.spawner = require("Game.Enemies.EnemySpawner"):new(0.2, 1, self)
 
 	self.bgColor = BlackColor
 end
@@ -25,7 +25,7 @@ end
 
 function GameScene:update(dt)
 	self.region.y = self.region.y + self.bgVel * dt
-	self.region.sourceRect = love.graphics.newQuad(self.region.x, self.region.y, self.region.w, self.region.h, self.region.image)
+	self.region.quad = love.graphics.newQuad(self.region.x, self.region.y, self.region.w, self.region.h, self.region.image)
 
 	self.spawner:update(dt)
 
@@ -33,22 +33,17 @@ function GameScene:update(dt)
 end
 
 function GameScene:draw()
-	love.graphics.setColor({1,1,1})
-	love.graphics.draw(self.region.image, self.region.sourceRect, 0, 0)
+	self.region:draw(0, 0, {1,1,1,1})
 
 	self:drawEntities()
 
 	love.graphics.setColor(WhiteColor)
 
-	love.graphics.print(tostring(self.lists.enemies:getSize()), 10, 10)
-	love.graphics.print(tostring(self.lists.player_bullets:getSize()), 10, 32)
-	love.graphics.print(tostring(self.spawner.timeToSpawn), 10, 64)
-
 	love.graphics.printf(
 		tostring(_G.GameScore),
 		_G.DefaultFont,
 		love.graphics.getWidth() * .5,
-		100,
+		50,
 		100
 		)
 

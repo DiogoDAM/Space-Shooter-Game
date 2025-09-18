@@ -9,3 +9,7 @@ _G.WhiteColor = { 215 / 255, 212 / 255, 204 / 255, 1 }
 _G.GameScore = 0
 
 _G.DefaultFont = love.graphics.newFont("Assets/Fonts/windows_command_prompt.ttf", 32)
+
+_G.LaserSound = love.audio.newSource(love.sound.newSoundData("Assets/Sounds/laserShoot.wav"))
+_G.LaserExplosionSound = love.audio.newSource(love.sound.newSoundData("Assets/Sounds/laserExplosion.wav"))
+_G.EnemyExplosionSound = love.audio.newSource(love.sound.newSoundData("Assets/Sounds/enemyExplosion.wav"))

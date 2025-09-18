@@ -10,7 +10,6 @@ tools.scene =		require("Tools.Core.Scene")
 
 tools.keyboard = 	require("Tools.Inputs.KeyboardManager"):new()
 
-
 function tools.newVector2(x, y)
 	return tools.vector2:new(x,y)
 end
@@ -31,6 +30,10 @@ function tools.newRectCollider(pos, w, h, object)
 	return require("Tools.Collisions.RectCollider"):new(pos, w, h, object)
 end
 
+
+function tools.newSpriteRender(region)
+	return require("Tools.Graphics.SpriteRender"):new(region)
+end
 
 _G.tools = tools
 

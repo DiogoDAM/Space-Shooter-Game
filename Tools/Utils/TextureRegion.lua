@@ -10,9 +10,14 @@ function TextureRegion:new(image, x, y, w, h)
 	o.h = h or 0
 
 	o.image = image
-	o.sourceRect = love.graphics.newQuad(x, y, w, h, image)
+	o.quad = love.graphics.newQuad(x, y, w, h, image)
 
 	return o
+end
+
+function TextureRegion:draw(x, y, color, r, ox, oy, sx, sy)
+	love.graphics.setColor(color)
+	love.graphics.draw(self.image, self.quad, x, y, r, sx, sy, ox, oy)
 end
 
 return TextureRegion

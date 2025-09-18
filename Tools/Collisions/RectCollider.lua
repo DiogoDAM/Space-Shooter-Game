@@ -25,7 +25,7 @@ function RectCollider:move(vel)
 	self.pos = self.pos + vel
 end
 
-function RectCollider:setPositin(pos)
+function RectCollider:setPosition(pos)
 	self.pos = pos
 end
 
